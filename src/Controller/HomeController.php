@@ -6,6 +6,7 @@ use App\Entity\FicheDePaie;
 use App\Entity\Participation;
 use App\Form\UserFormType;
 use App\Repository\FormationRepository;
+use App\Repository\ParticipationRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -107,15 +108,17 @@ class HomeController extends AbstractController
     
      //Afficher formation
      #[Route('/home/afficheforma', name: 'user_afficheforma')]
-     public function afficheforma(FormationRepository $Rep): Response
+     public function afficheforma(FormationRepository $Rep,ParticipationRepository $part): Response
      {
          $user=$this->getUser();
+         $participation=$part->findAll();
          $Formation = $Rep->orderById();
  
  
          return $this->render('home/afficheformation.html.twig', [
              'f' => $Formation,
              'user' => $user,
+             'p'=>$participation
  
  
          ]);

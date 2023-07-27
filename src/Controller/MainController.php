@@ -274,7 +274,7 @@ class MainController extends AbstractController
                  $Produit= new Produit();
                  $form=$this->createForm(ProduitFormType::class,$Produit);
                      $form->handleRequest($request);
-                     if($form->isSubmitted()&& $form->isValid()){
+                     if($form->isSubmitted() ){
                          $em =$doctrine->getManager() ;
                          $imageFile = $form->get('image')->getData();
                          
@@ -336,7 +336,7 @@ public function modifprod(ManagerRegistry $doctrine,Request $request,$id,Produit
         $user=$this->getUser();
     $form=$this->createForm(ProduitFormType::class,$Produit);
      $form->handleRequest($request);
-     if($form->isSubmitted()&&$form->isValid() ){
+     if($form->isSubmitted()  ){
     $em =$doctrine->getManager() ;
     $imageFile = $form->get('image')->getData();
        

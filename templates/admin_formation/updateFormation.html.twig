@@ -12,8 +12,7 @@
 				</div>
 			</div>
 			<!-- Row end  -->
-			{{ form_start(f,{'attr': {'novalidate': 'novalidate'}}
-			) }}
+			{{ form_start(f)}}
 
 
 			<div class="row clearfix g-3">
@@ -27,6 +26,7 @@
 						<div class="modal-body">
 							<div class="mb-3">
 								<label for="exampleFormControlInput99" class="form-label">Event Name</label>
+								{{form_errors(f.nom_formation)}}
 								{{ form_widget(f.nom_formation, {'attr': {'class': 'form-control', 'placeholder': 'Event Name'}}) }}
 							</div>
 							<div class="mb-3">
@@ -39,12 +39,13 @@
 									<div class="row g-3 mb-3">
 										<div class="col">
 											<label for="datepickerded" class="form-label">Event Start Date</label>
+											{{form_errors(f.date_debut)}}
 											{{ form_widget(f.date_debut) }}
 
 										</div>
 										<div class="col">
 											<label for="datepickerdedone" class="form-label">Event End Date</label>
-
+		 											{{form_errors(f.date_fin)}}
 											{{ form_widget(f.date_fin) }}
 										</div>
 									</div>
@@ -52,6 +53,7 @@
 							</div>
 							<div class="mb-3">
 								<label for="exampleFormControlTextarea78" class="form-label">Event Description (optional)</label>
+								{{form_errors(f.description)}}
 								{{ form_widget(f.description, {'attr': {'class': 'form-control', 'placeholder': 'Description Name'}}) }}
 
 							</div>

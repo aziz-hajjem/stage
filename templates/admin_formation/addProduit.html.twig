@@ -21,8 +21,7 @@
 						<div
 							class="card-body">
 							<!-- Add Tickit-->
-							{{ form_start(f,{'attr': {'novalidate': 'novalidate'}}
-							) }}
+							{{ form_start(f,{'attr': {'novalidate': 'novalidate'}} ) }}
 
 							<div class="modal-content">
 								<div class="modal-header">
@@ -33,7 +32,7 @@
 								<div class="modal-body">
 									<div class="mb-3">
 										<label for="sub" class="form-label">Product Name</label>
-										{{form_errors(f.libelle)}} 
+										{{form_errors(f.libelle)}}
 										{{ form_widget(f.libelle, {'attr': {'class': 'form-control', 'placeholder': 'Product Name'}}) }}
 									</div>
 									<div class="deadline-form">
@@ -41,13 +40,13 @@
 											<div class="row g-3 mb-3">
 												<div class="col">
 													<label for="deptwo" class="form-label">Importation Date</label>
-													{{form_errors(f.date_importation)}} 
+													{{form_errors(f.date_importation)}}
 													{{ form_widget(f.date_importation, {'attr': {'class': 'form-control', 'id': 'deptwo'}}) }}
 
 												</div>
 												<div class="col">
 													<label for="deptwo" class="form-label">Expired Date</label>
-													{{form_errors(f.date_expiration)}} 
+													{{form_errors(f.date_expiration)}}
 													{{ form_widget(f.date_expiration, {'attr': {'class': 'form-control', 'id': 'deptwo'}}) }}
 												</div>
 											</div>
@@ -58,12 +57,12 @@
 										<div class="row g-3 mb-3">
 											<div class="col">
 												<label for="depone" class="form-label">Price Product</label>
-												{{form_errors(f.prix)}} 
+												{{form_errors(f.prix)}}
 												{{ form_widget(f.prix, {'attr': {'class': 'form-control', 'placeholder': 'Product Price'}}) }}
 											</div>
 											<div class="col">
 												<label for="depone" class="form-label">Quantity Product</label>
-												{{form_errors(f.quantite)}} 
+												{{form_errors(f.quantite)}}
 												{{ form_widget(f.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Product Quantity'}}) }}
 											</div>
 										</div>
