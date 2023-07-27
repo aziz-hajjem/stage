@@ -63,4 +63,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function isUserVerifiedByEmail(string $email): bool
+{
+    $user = $this->findOneBy(['email' => $email]);
+
+    return $user && $user->isVerified();
+}
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CongeRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,18 +20,21 @@ class Conge
     private ?User $user = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
+    #[Assert\GreaterThan('today',message:"La date Debut doit etre postérieur a la date d'aujourd'hui")]
     private ?\DateTimeInterface $date_debut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
+    #[Assert\Expression("this.getDateDebut() < this.getDateFin()",message:"La date fin doit etre postérieur a la date debut")  ]
     private ?\DateTimeInterface $date_fin = null;
 
     #[ORM\Column]
-    private ?bool $statut_conge = null;
+    private ?string $statut_conge = null;
 
-    #[ORM\Column]
-    private ?int $duree_max = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
     private ?string $commentaire = null;
 
     public function getId(): ?int
@@ -74,29 +78,18 @@ class Conge
         return $this;
     }
 
-    public function isStatutConge(): ?bool
+    public function getStatutConge(): ?string
     {
         return $this->statut_conge;
     }
 
-    public function setStatutConge(bool $statut_conge): static
+    public function setStatutConge(string $statut_conge): static
     {
         $this->statut_conge = $statut_conge;
 
         return $this;
     }
 
-    public function getDureeMax(): ?int
-    {
-        return $this->duree_max;
-    }
-
-    public function setDureeMax(int $duree_max): static
-    {
-        $this->duree_max = $duree_max;
-
-        return $this;
-    }
 
     public function getCommentaire(): ?string
     {

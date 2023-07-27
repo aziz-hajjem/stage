@@ -36,13 +36,7 @@ class FicheDePaie
     private ?float $autre_deduction = null;
 
     #[ORM\Column]
-    private ?float $salaire_brut_imposable = null;
-
-    #[ORM\Column]
     private ?float $avance = null;
-
-    #[ORM\Column]
-    private ?float $salaire_net = null;
 
     #[ORM\Column]
     private ?int $heures_supplimentaires = null;
@@ -136,17 +130,7 @@ class FicheDePaie
         return $this;
     }
 
-    public function getSalaireBrutImposable(): ?float
-    {
-        return $this->salaire_brut_imposable;
-    }
-
-    public function setSalaireBrutImposable(float $salaire_brut_imposable): static
-    {
-        $this->salaire_brut_imposable = $salaire_brut_imposable;
-
-        return $this;
-    }
+   
 
     public function getAvance(): ?float
     {
@@ -160,17 +144,7 @@ class FicheDePaie
         return $this;
     }
 
-    public function getSalaireNet(): ?float
-    {
-        return $this->salaire_net;
-    }
-
-    public function setSalaireNet(float $salaire_net): static
-    {
-        $this->salaire_net = $salaire_net;
-
-        return $this;
-    }
+   
 
     public function getHeuresSupplimentaires(): ?int
     {

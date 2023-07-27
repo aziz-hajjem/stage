@@ -21,6 +21,42 @@ class CongeRepository extends ServiceEntityRepository
         parent::__construct($registry, Conge::class);
     }
 
+    public function validateConge($conge){
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager
+            ->createQuery("
+            UPDATE App\Entity\Conge b SET b.statut_conge = 'Accepté' WHERE b.id = :conge 
+
+        ")
+        ->setParameter('conge',$conge)
+        ;
+        return $query->getResult();
+    }
+    public function NoValidateConge($conge){
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager
+            ->createQuery("
+            UPDATE App\Entity\Conge b SET b.statut_conge = 'Refusé' WHERE b.id = :conge 
+
+        ")
+        ->setParameter('conge',$conge)
+        ;
+        return $query->getResult();
+    }
+    public function getMesConges($user){
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager
+            ->createQuery("
+            SELECT b
+            FROM App\Entity\Conge b
+            where b.user = :user
+            
+        ")
+        ->setParameter('user',$user)
+        ;
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Conge[] Returns an array of Conge objects
 //     */

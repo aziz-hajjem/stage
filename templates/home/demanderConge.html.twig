@@ -1,0 +1,62 @@
+{% extends "home/index.html.twig" %}
+{% block body %}
+   <!-- Body: Body -->
+        <div class="body d-flex py-3">
+            <div class="container-xxl">
+                <div class="row align-items-center">
+                    <div class="border-0 mb-4">
+                        <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                            <h3 class="fw-bold mb-0">Leaves</h3>
+                        </div>
+                    </div>
+                </div> <!-- Row end  -->
+
+                <div class="row align-item-center">
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                <h6 class="mb-0 fw-bold ">Request</h6> 
+                            </div>
+                            <div class="card-body">
+                                {{ form_start(f, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                                    <div class="row g-3 align-items-center">
+                                        
+                                        <div class="col-md-6">
+                                            <label for="admitdate" class="form-label">Date De Début </label>
+                                            {{ form_errors(f.date_debut) }}
+                                            {{ form_widget(f.date_debut) }}
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <label for="admitdate" class="form-label">Date De Fin </label>
+                                            {{ form_errors(f.date_fin) }}
+                                            {{ form_widget(f.date_fin) }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="admitdate" class="form-label">Raison</label>
+                                            {{ form_errors(f.commentaire) }}
+                                            {{ form_widget(f.commentaire) }}
+                                        </div>
+                                    </div>
+                                    
+                                    {# <button type="submit" class="btn btn-primary mt-4">Submit</button> #}
+                                    <button class="btn btn-primary mt-4">{{ button_label|default('Save') }}</button>
+                                {{ form_end(f) }}
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                </div><!-- Row end  -->
+
+            </div>
+        </div>
+
+
+{% endblock %}
+
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}

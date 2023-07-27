@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
@@ -15,18 +17,25 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
     private ?string $libelle = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
     private ?int $quantite = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
+    #[Assert\GreaterThan('today',message:"La date d'importation doit etre postérieur a la date d'aujourd'hui")]
     private ?\DateTimeInterface $date_importation = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
+    #[Assert\Expression("this.getDateImportation() < this.getDateExpiration()",message:"La date d'expiration doit etre postérieur a la date d'importation")  ]
     private ?\DateTimeInterface $date_expiration = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
     private ?float $prix = null;
 
     #[ORM\Column(length: 255)]

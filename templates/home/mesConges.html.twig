@@ -1,0 +1,83 @@
+{% extends "home/index.html.twig" %}
+{% block body %}
+	<!-- Body: Body -->
+	<div class="body d-flex py-lg-3 py-md-2">
+		<div class="container-xxl">
+			<div class="row align-items-center">
+				<div class="border-0 mb-4">
+					<div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+						<h3 class="fw-bold mb-0">Leaves</h3>
+						<div class="col-auto d-flex w-sm-100">
+							<a href="{{ path('app_conge_new') }}"> <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#leaveadd">
+								<i class="icofont-plus-circle me-2 fs-6"></i>Add Leave</button> </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Row end  -->
+			<div class="row clearfix g-3">
+				<div class="col-sm-12">
+					<div class="card mb-3">
+						<div class="card-body">
+							<table id="myProjectTable" class="table table-hover align-middle mb-0" style="width:100%">
+								<thead>
+									<tr>
+										<th>Leave Id</th>
+										<th>Employee Name</th>
+										<th>Leave Type</th>
+										<th>From</th>
+										<th>To</th>
+										<th>Reason</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in conges %}
+										<tr>
+											<td>
+												<a href="#" class="fw-bold text-secondary">#CNG :
+													{{item.getId()}}
+												</a>
+											</td>
+											<td>
+												<img class="avatar rounded-circle" src="http://localhost/images/{{item.getUser().getImage()}}" alt="">
+												<span class="fw-bold ms-1">{{item.getUser().getNom()}}
+													{{item.getUser().getPrenom()}}</span>
+											</td>
+											<td>
+											{% if item.getStatutConge() == "En Attente" %}
+                                            <h6><span class="badge bg-secondary">{{item.getStatutConge()}}</span> </h6>
+											{% elseif item.getStatutConge() == "Accepté" %}
+											<h6><span class="badge bg-success">{{item.getStatutConge()}}</span> </h6>
+											{% else %}
+											<h6><span class="badge bg-danger">{{item.getStatutConge()}}</span> </h6>
+                                            {% endif %}
+											
+											
+												
+											</td>
+											<td>
+												{{item.getDateDebut|date("d/m/Y")}}
+											</td>
+											<td>
+												{{item.getDateFin|date("d/m/Y")}}
+											</td>
+											<td>
+												{{item.getCommentaire()}}
+											</td>
+                                            
+										</tr>
+
+									{% endfor %}
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Row End -->
+		</div>
+	</div>
+{% endblock %}

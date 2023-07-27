@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\FormationRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
@@ -15,21 +17,26 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
     private ?string $nom_formation = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lieu = null;
+    
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
+    #[Assert\GreaterThan('today',message:"La date Debut doit etre postérieur a la date d'aujourd'hui")]
     private ?\DateTimeInterface $date_debut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Ce champs est obligatoire")]
+    #[Assert\Expression("this.getDateDebut() < this.getDateFin()",message:"La date fin doit etre postérieur a la date debut")  ]
     private ?\DateTimeInterface $date_fin = null;
 
     public function getId(): ?int
@@ -73,17 +80,7 @@ class Formation
         return $this;
     }
 
-    public function getLieu(): ?string
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(string $lieu): static
-    {
-        $this->lieu = $lieu;
-
-        return $this;
-    }
+   
 
     public function getDateDebut(): ?\DateTimeInterface
     {
